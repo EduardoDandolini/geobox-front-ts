@@ -1,5 +1,8 @@
 import axios from "axios";
 
+import { DeliveryResponse } from '../Interfaces/DeliveryResponse';
+
+
 export interface LoginDTO {
   email: string;
   password: string;
@@ -22,6 +25,16 @@ export const login = async (loginDTO: LoginDTO): Promise<LoginResponse> => {
     return response.data;
   } catch (error) {
     console.error('Erro ao fazer login:', error);
+    throw error;
+  }
+};
+
+export const getAllDeliveries = async (): Promise<DeliveryResponse[]> => {
+  try {
+    const response = await apiClient.get<DeliveryResponse[]>('api/v1/delivery');
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar localizações:', error);
     throw error;
   }
 };
