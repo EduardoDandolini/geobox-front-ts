@@ -1,15 +1,31 @@
+html, body {
+    background-color: #2D2F3D;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 20px;
+    background-color: #2D2F3D;
+    width: 370px;
+    font-family: 'Inter', sans-serif;
+}
+
 .container h1 {
     text-align: center;
     font-size: 18px;
-    color: #FFF;
-    margin-bottom: 75px;
+    color: #333;
+    margin-bottom: 20px;
 }
 
 .container .input-fields {
     position: relative;
-    width: 100%;
-    height: 50px;
-    margin: 30px auto;
+    width: 370px;
+    max-width: 400px;
+    margin: 20px auto;
 }
 
 .logo-container {
@@ -21,41 +37,50 @@
 .logo {
     max-width: 150px;
     height: auto;
+    margin-bottom: 1rem;
 }
 
 .input-fields input {
     width: 100%;
-    height: 100%;
-    background-color: #D9D9D9;
-    border: solid 3px #979797;
+    height: 50px;
+    background-color: transparent;
+    border: solid 2px #979797;
     border-radius: 10px;
     outline: none;
-    color: #757575;
-    padding: 20px 10px;
+    color: #aaa;
+    padding: 0 15px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.input-fields input:hover {
+    border-color: #FF6300;
 }
 
 .input-fields input::placeholder {
-    color: #757575;
+    color: #aaa;
 }
 
 .input-fields .icon {
     position: absolute;
-    right: 25px;
+    right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 16px;
-    color: #979797;
+    font-size: 20px;
+    color: #aaa;
 }
 
 .container .recall-forget {
     display: flex;
     justify-content: space-between;
-    font-size: 14.5px;
-    margin: -15px 0 15px;
+    width: 100%;
+    max-width: 400px;
+    font-size: 14px;
+    margin: 10px 0;
 }
 
 .recall-forget label {
-    color: #D9D9D9;
+    color: #aaa;
 }
 
 .recall-forget input {
@@ -64,7 +89,6 @@
 
 .recall-forget a {
     color: #0D95F8;
-    margin-left: 6rem;
     text-decoration: none;
 }
 
@@ -73,34 +97,38 @@
 }
 
 .container button {
-    margin-top: 10px;
     width: 100%;
+    max-width: 400px;
     height: 50px;
     background-color: #FF6300;
     border: none;
-    outline: none;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-    text-shadow: none;
+    transition: background-color 0.3s ease;
+    outline: none;
+    margin-top: 50px;
+}
+
+.container button:hover {
+    background-color: #e55900;
 }
 
 .container .signup-link {
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
     margin-top: 15px;
 }
 
 .signup-link p {
-    color: #D9D9D9;
+    color: #aaa;
 }
 
 .signup-link p a {
     color: #618E00;
-    font-weight: 600;
+    font-weight: bold;
     text-decoration: none;
 }
 
