@@ -35,7 +35,6 @@ const Login = () => {
                 <div className="logo-container">
                     <img src="src/assets/Group 18.svg" alt="Logo do App" className="logo" />
                 </div>
-                <h1>Bem vindo!</h1>
 
                 <div className="input-fields">
                     <input
