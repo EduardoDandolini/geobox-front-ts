@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './Mapa.css';
@@ -12,30 +12,42 @@ const checkedIcon = L.icon({
   popupAnchor: [0, -32],
 });
 
-//Verificar por que o mapa não está sendo apresentado corretamente
-
 export default function MapView() {
-  useEffect(() => {
-    const map = L.map('map').setView([-28.4713, -49.0144], 13);
+  const mapRef = useRef<L.Map | null>(null); 
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors',
-    }).addTo(map);
+  useEffect(() => {
+    console.log('Tentando inicializar o mapa...');
+
+    if (!mapRef.current) {
+      mapRef.current = L.map('map').setView([-28.4713, -49.0144], 13);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+      }).addTo(mapRef.current);
+    }
 
     const loadLocations = async () => {
-        try {
-          const data: DeliveryResponse[] = await getAllDeliveries();
-          data.forEach((location) => {
+      try {
+        const data: DeliveryResponse[] = await getAllDeliveries();
+        data.forEach((location) => {
+          if (mapRef.current) { 
             L.marker([location.latitude, location.longitude], { icon: checkedIcon })
-              .addTo(map);  
-          });
-        } catch (error) {
-          console.error('Erro ao carregar localizações:', error);
-        }
-      };
-      
+              .addTo(mapRef.current);  
+          }
+        });
+      } catch (error) {
+        console.error('Erro ao carregar localizações:', error);
+      }
+    };
 
     loadLocations();
+
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
   }, []);
 
   return <div id="map"></div>;

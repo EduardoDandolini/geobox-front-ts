@@ -1,56 +1,102 @@
-import React, { useState } from 'react';
-import { FaBox, FaTruck, FaUser, FaCheck } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { FaBox, FaTruck, FaCheck } from 'react-icons/fa';
 import "./EntregaCaixa.css";
 import Header from '../Header/Header';
 import NavBar from '../NavBar/NavBar';
+import { getTrucks, getBoxes, saveDelivery } from '../../service/GeoBoxAPI'; 
+import { TruckResponse } from '../../Interfaces/TruckResponse';
+import { BoxResponse } from '../../Interfaces/BoxResponse';
+import { DeliveryRequest } from '../../Interfaces/DeliveryRequest';
 
 const Entrega = () => {
+    const [trucks, setTrucks] = useState<TruckResponse[]>([]);
+    const [boxes, setBoxes] = useState<BoxResponse[]>([]);
+    const [selectedTruck, setSelectedTruck] = useState<string>('');
+    const [selectedBox, setSelectedBox] = useState<string>('');
+    const userId = 1; 
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const fetchedTrucks = await getTrucks();
+            const fetchedBoxes = await getBoxes();
+            setTrucks(fetchedTrucks);
+            setBoxes(fetchedBoxes);
+        };
+
+        fetchData();
+    }, []);
+
+    const handleDelivery = async () => {
+        if (!selectedTruck || !selectedBox) {
+            console.error('Por favor, selecione um caminhão e uma caixa antes de continuar.');
+            return;
+        }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                const deliveryRequest: DeliveryRequest = {
+                    latitude,
+                    longitude,
+                    truckPlate: selectedTruck, 
+                    userId,
+                    boxNumber: selectedBox,
+                };
+
+                await saveDelivery(deliveryRequest);
+                console.log('Entrega salva com sucesso!'); 
+            }, (error) => {
+                console.error('Erro ao obter localização:', error);
+            });
+        } else {
+            console.error('Geolocalização não é suportada neste navegador.');
+        }
+    };
 
     return (
         <div className="entrega-container">
-            <Header/>
+            <Header />
             <h1>Entrega</h1>
             <div className="input-fields">
                 <div className="input-group">
-                    <select className="input-select">
-                        <option value="">Selecione o número da caixa</option>
-                        <option value="caixa1">1</option>
-                        <option value="caixa2">2</option>
-                        <option value="caixa3">3</option>
-                        <option value="caixa4">4</option>
-                    </select>
-                    <FaBox className='icon' />
-                </div>
-
-                <div className="input-group">
-                    <select className="input-select">
+                    <select
+                        className="input-select"
+                        onChange={(e) => setSelectedTruck(e.target.value)}
+                    >
                         <option value="">Selecione o caminhão</option>
-                        <option value="caminhao1">MGD 6545</option>
-                        <option value="caminhao2">DAW 5413</option>
-                        <option value="caminhao3">MCI 5579</option>
-                        <option value="caminhao4">CPN 7213</option>
+                        {trucks.map((truck) => (
+                            <option key={truck.plate} value={truck.plate}>
+                                {truck.plate}
+                            </option>
+                        ))}
                     </select>
                     <FaTruck className='icon' />
                 </div>
 
                 <div className="input-group">
-                    <select className="input-select">
-                        <option value="">Selecione o Cliente</option>
-                        <option value="cliente1">Metalúrgica</option>
-                        <option value="cliente2">Supermercado</option>
-                        <option value="cliente3">Loja</option>
+                    <select
+                        className="input-select"
+                        onChange={(e) => setSelectedBox(e.target.value)}
+                    >
+                        <option value="">Selecione o número da caixa</option>
+                        {boxes.map((box) => (
+                            <option key={box.boxNumber} value={box.boxNumber}>
+                                {box.boxNumber}
+                            </option>
+                        ))}
                     </select>
-                    <FaUser className='icon' />
+                    <FaBox className='icon' />
                 </div>
             </div>
 
-            <button className="delivery-button">
+            <button className="delivery-button" onClick={handleDelivery}>
                 <FaCheck className="button-icon" />
             </button>
 
             <NavBar />
         </div>
-
     );
 };
 
