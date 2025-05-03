@@ -4,15 +4,12 @@ import { DeliveryResponse } from '../Interfaces/DeliveryResponse';
 import { TruckResponse } from '../Interfaces/TruckResponse';
 import { DeliveryRequest } from '../Interfaces/DeliveryRequest';
 import { BoxResponse } from '../Interfaces/BoxResponse';
+import { LoginResponse } from "../Interfaces/LoginResponse";
 
 
 export interface LoginDTO {
   email: string;
   password: string;
-}
-
-export interface LoginResponse {
-  token: string;
 }
 
 const apiClient = axios.create({

@@ -13,7 +13,8 @@ const Entrega = () => {
     const [boxes, setBoxes] = useState<BoxResponse[]>([]);
     const [selectedTruck, setSelectedTruck] = useState<string>('');
     const [selectedBox, setSelectedBox] = useState<string>('');
-    const userId = 1; 
+    const userId = sessionStorage.getItem("user");
+    console.log(userId);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -41,7 +42,7 @@ const Entrega = () => {
                     latitude,
                     longitude,
                     truckPlate: selectedTruck, 
-                    userId,
+                    userId: Number(userId),
                     boxNumber: selectedBox,
                 };
 

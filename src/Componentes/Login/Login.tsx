@@ -3,12 +3,14 @@ import { useState, FormEvent } from 'react';
 import { login } from "../../service/GeoBoxAPI";
 import { LoginDTO } from "../../Interfaces/LoginDTO";
 import { LoginResponse } from '../../Interfaces/LoginResponse';
+import { useNavigate } from 'react-router-dom';
 
 import "./Login.css";
 
 const Login = () => {
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -22,11 +24,13 @@ const Login = () => {
             const response: LoginResponse = await login(loginData);
             console.log("Login bem-sucedido:", response);
 
-            // sessionStorage.setItem("token", response.token);
-            // navigate('/dashboard');
+            sessionStorage.setItem("user", JSON.stringify(response.userId));
+            console.log(sessionStorage.getItem("user"));
+            sessionStorage.setItem("token", response.token);
+            navigate('/mapa');
         } catch (error) {
             alert("Erro ao fazer login. Verifique seu e-mail e senha.");
-        }
+        }   
     };
 
     return (
