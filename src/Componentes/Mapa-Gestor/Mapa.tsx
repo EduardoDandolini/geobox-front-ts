@@ -1,9 +1,11 @@
-import { useEffect } from "react";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
-import "./Mapa.css";
-import { getAllDeliveries } from "../../service/GeoBoxAPI";
-import { DeliveryResponse } from "../../Interfaces/DeliveryResponse";
+import { useEffect, useRef } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import './Mapa.css';
+import { getAllDeliveries } from '../../service/GeoBoxAPI';
+import { DeliveryResponse } from '../../Interfaces/DeliveryResponse';
+import Header from '../Header/Header';
+import NavBar from '../NavBar/NavBar';
 
 const checkedIcon = L.icon({
   iconUrl: "/icons/marker.png", // Atualize para o caminho correto do ícone
@@ -13,41 +15,42 @@ const checkedIcon = L.icon({
 });
 
 export default function MapView() {
+  const mapRef = useRef<L.Map | null>(null); 
+
   useEffect(() => {
-    const mapContainer = document.getElementById("map");
+    console.log('Tentando inicializar o mapa...');
 
-    if (!mapContainer) {
-      console.error("Contêiner do mapa não encontrado!");
-      return;
+    if (!mapRef.current) {
+      mapRef.current = L.map('map').setView([-28.4713, -49.0144], 13);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+      }).addTo(mapRef.current);
     }
-
-    // Inicializando o mapa
-    const map = L.map(mapContainer).setView([-28.4713, -49.0144], 13);
-
-    // Adicionando camada do OpenStreetMap
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "© OpenStreetMap contributors",
-    }).addTo(map);
 
     // Função para carregar as localizações
     const loadLocations = async () => {
       try {
         const data: DeliveryResponse[] = await getAllDeliveries();
-        console.log("Localizações carregadas:", data);
-
         data.forEach((location) => {
-          if (location.latitude && location.longitude) {
-            L.marker([location.latitude, location.longitude], { icon: checkedIcon }).addTo(map);
-          } else {
-            console.warn("Localização inválida:", location);
+          if (mapRef.current) { 
+            L.marker([location.latitude, location.longitude], { icon: checkedIcon })
+              .addTo(mapRef.current);  
           }
         });
       } catch (error) {
-        console.error("Erro ao carregar localizações:", error);
+        console.error('Erro ao carregar localizações:', error);
       }
     };
 
     loadLocations();
+
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
   }, []);
 
   return <div id="map"></div>;
