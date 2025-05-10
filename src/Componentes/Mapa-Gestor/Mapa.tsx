@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import './Mapa.css';
 import { getAllDeliveries } from '../../service/GeoBoxAPI';
 import { DeliveryResponse } from '../../Interfaces/DeliveryResponse';
-import Navbar from '../NavBar/NavegacaoTelas'; 
+import Navbar from '../NavBar/NavegacaoTelas';
 
 const checkedIcon = L.icon({
   iconUrl: 'https://cdn-icons-png.flaticon.com/512/190/190411.png',
@@ -14,7 +14,7 @@ const checkedIcon = L.icon({
 });
 
 export default function MapView() {
-  const mapRef = useRef<L.Map | null>(null); 
+  const mapRef = useRef<L.Map | null>(null);
 
   useEffect(() => {
     console.log('Tentando inicializar o mapa...');
@@ -31,7 +31,7 @@ export default function MapView() {
       try {
         const data: DeliveryResponse[] = await getAllDeliveries();
         data.forEach((location) => {
-          if (mapRef.current) { 
+          if (mapRef.current) {
             const marker = L.marker([location.latitude, location.longitude], { icon: checkedIcon })
               .addTo(mapRef.current);
 
@@ -58,7 +58,7 @@ export default function MapView() {
 
   return (
     <div>
-      <Navbar /> 
+      <Navbar />
       <div id="map"></div>
     </div>
   );

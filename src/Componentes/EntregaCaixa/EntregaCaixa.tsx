@@ -3,7 +3,7 @@ import { FaBox, FaTruck, FaCheck } from 'react-icons/fa';
 import "./EntregaCaixa.css";
 import Header from '../Header/Header';
 import NavBar from '../NavBar/NavBar';
-import { getTrucks, getBoxes, saveDelivery } from '../../service/GeoBoxAPI'; 
+import { getTrucks, getBoxes, saveDelivery } from '../../service/GeoBoxAPI';
 import { TruckResponse } from '../../Interfaces/TruckResponse';
 import { BoxResponse } from '../../Interfaces/BoxResponse';
 import { DeliveryRequest } from '../../Interfaces/DeliveryRequest';
@@ -41,13 +41,13 @@ const Entrega = () => {
                 const deliveryRequest: DeliveryRequest = {
                     latitude,
                     longitude,
-                    truckPlate: selectedTruck, 
+                    truckPlate: selectedTruck,
                     userId: Number(userId),
                     boxNumber: selectedBox,
                 };
 
                 await saveDelivery(deliveryRequest);
-                console.log('Entrega salva com sucesso!'); 
+                console.log('Entrega salva com sucesso!');
             }, (error) => {
                 console.error('Erro ao obter localização:', error);
             });
@@ -98,9 +98,9 @@ const Entrega = () => {
 
             <NavBar />
         </div>
-        
+
     );
-    
+
 };
 
 export default Entrega;
