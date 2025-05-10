@@ -98,7 +98,9 @@ const Entrega = () => {
 
             <NavBar />
         </div>
+        
     );
+    
 };
 
 export default Entrega;
