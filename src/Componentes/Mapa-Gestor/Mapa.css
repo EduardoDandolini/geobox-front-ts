@@ -1,5 +1,11 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Garante que o corpo ocupe 100% da altura da janela */
+  width: 100%;  /* Garante que o corpo ocupe 100% da largura */
+}
+
 #map {
   height: 100vh; /* 100% da altura da janela de visualização */
   width: 100vw;  /* 100% da largura da janela de visualização */
 }
-

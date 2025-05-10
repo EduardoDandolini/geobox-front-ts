@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { FaBox, FaTruck, FaCheck, FaSignOutAlt } from 'react-icons/fa';
+import { FaBox, FaTruck, FaCheck } from 'react-icons/fa';
 import "./EntregaCaixa.css";
 import Header from '../Header/Header';
 import NavBar from '../NavBar/NavBar';
-import { getTrucks, getBoxes, saveDelivery } from '../../service/GeoBoxAPI'; 
+import { getTrucks, getBoxes, saveDelivery } from '../../service/GeoBoxAPI';
 import { TruckResponse } from '../../Interfaces/TruckResponse';
 import { BoxResponse } from '../../Interfaces/BoxResponse';
 import { DeliveryRequest } from '../../Interfaces/DeliveryRequest';
@@ -41,13 +41,13 @@ const Entrega = () => {
                 const deliveryRequest: DeliveryRequest = {
                     latitude,
                     longitude,
-                    truckPlate: selectedTruck, 
+                    truckPlate: selectedTruck,
                     userId: Number(userId),
                     boxNumber: selectedBox,
                 };
 
                 await saveDelivery(deliveryRequest);
-                console.log('Entrega salva com sucesso!'); 
+                console.log('Entrega salva com sucesso!');
             }, (error) => {
                 console.error('Erro ao obter localização:', error);
             });
@@ -66,7 +66,7 @@ const Entrega = () => {
                         className="input-select"
                         onChange={(e) => setSelectedTruck(e.target.value)}
                     >
-                        <option value="">Caminhão</option>
+                        <option value="">Selecione o caminhão</option>
                         {trucks.map((truck) => (
                             <option key={truck.plate} value={truck.plate}>
                                 {truck.plate}
@@ -81,7 +81,7 @@ const Entrega = () => {
                         className="input-select"
                         onChange={(e) => setSelectedBox(e.target.value)}
                     >
-                        <option value="">Número da caixa</option>
+                        <option value="">Selecione o número da caixa</option>
                         {boxes.map((box) => (
                             <option key={box.boxNumber} value={box.boxNumber}>
                                 {box.boxNumber}
@@ -96,13 +96,11 @@ const Entrega = () => {
                 <FaCheck className="button-icon" />
             </button>
 
-            <button className="signout-button">
-                Sair <FaSignOutAlt className="signout-icon" />
-            </button>
-
             <NavBar />
         </div>
+
     );
+
 };
 
 export default Entrega;
