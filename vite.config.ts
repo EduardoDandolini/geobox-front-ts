@@ -39,4 +39,9 @@ export default defineConfig({
       },
     }),
   ],
+  // server: {
+  //   headers: {
+  //     'Content-Security-Policy': 'geolocation \'self\';',
+  //   },
+  // },
 });

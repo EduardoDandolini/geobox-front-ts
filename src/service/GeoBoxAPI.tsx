@@ -5,6 +5,7 @@ import { TruckResponse } from '../Interfaces/TruckResponse';
 import { DeliveryRequest } from '../Interfaces/DeliveryRequest';
 import { BoxResponse } from '../Interfaces/BoxResponse';
 import { LoginResponse } from "../Interfaces/LoginResponse";
+import { GamificationResponse } from "../Interfaces/GamificationResponse";
 
 
 export interface LoginDTO {
@@ -65,5 +66,27 @@ export const getBoxes = async (): Promise<BoxResponse[]> => {
   } catch (error) {
     console.error('Erro ao buscar caixas:', error);
     return [];
+  }
+};
+
+export const getPoints = async (): Promise<GamificationResponse[]> => {
+  try {
+    const response = await apiClient.get<GamificationResponse[]>('api/v1/gamification/points');
+    return response.data; 
+  } catch (error) {
+    console.error('Erro ao buscar pontos:', error);
+    return [];
+  }
+};
+
+export const generateSheetDelivery = async () => {
+  try {
+    const response = await apiClient.get('api/v1/delivery/generate-sheet', {
+      responseType: 'blob',
+    });
+    return response.data; // isso será um Blob agora
+  } catch (error) {
+    console.error('Erro ao buscar relatório:', error);
+    throw error;
   }
 };

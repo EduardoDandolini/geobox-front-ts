@@ -4,39 +4,57 @@ import 'leaflet/dist/leaflet.css';
 import './Mapa.css';
 import { getAllDeliveries } from '../../service/GeoBoxAPI';
 import { DeliveryResponse } from '../../Interfaces/DeliveryResponse';
-import Navbar from '../NavBar/NavegacaoTelas';
+import MapContainer from './MapaComponent';
 
 const checkedIcon = L.icon({
-  iconUrl: 'https://cdn-icons-png.flaticon.com/512/190/190411.png',
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32],
+  iconUrl: 'https://unpkg.com/leaflet@1.9.2/dist/images/marker-icon.png',
+  iconSize: [25, 30],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
 });
 
 export default function MapView() {
   const mapRef = useRef<L.Map | null>(null);
 
+  console.log('MapView component rendered');
+
   useEffect(() => {
-    console.log('Tentando inicializar o mapa...');
+    console.log('useEffect triggered');
+
+    const mapDiv = document.getElementById('map');
+    console.log('Map div:', mapDiv);
+
+    if (!mapDiv) {
+      console.error('Map div not found!');
+    }
 
     if (!mapRef.current) {
+      console.log('Initializing map...');
       mapRef.current = L.map('map').setView([-28.4713, -49.0144], 13);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors',
       }).addTo(mapRef.current);
+
+      console.log('Map initialized');
+    } else {
+      console.log('Map already initialized');
     }
 
     const loadLocations = async () => {
+      console.log('Loading locations...');
       try {
         const data: DeliveryResponse[] = await getAllDeliveries();
+        console.log(`Loaded ${data.length} locations`);
+
         data.forEach((location) => {
+          console.log('Adding marker:', location);
           if (mapRef.current) {
-            const marker = L.marker([location.latitude, location.longitude], { icon: checkedIcon })
+            const marker = L.marker([location.longitude, location.latitude], { icon: checkedIcon })
               .addTo(mapRef.current);
 
             marker.bindPopup(`
-              <b>ID da Entrega:</b> ${location.id}<br>
+              <b>Código da Entrega:</b> ${location.id}<br>
               <b>Nome do Usuário:</b> ${location.username}
             `);
           }
@@ -49,6 +67,7 @@ export default function MapView() {
     loadLocations();
 
     return () => {
+      console.log('Cleaning up map...');
       if (mapRef.current) {
         mapRef.current.remove();
         mapRef.current = null;
@@ -57,9 +76,10 @@ export default function MapView() {
   }, []);
 
   return (
-    <div>
-      <Navbar />
-      <div id="map"></div>
-    </div>
+    <MapContainer>
+      <div className="map-wrapper">
+         <div id="map"></div>
+      </div>
+    </MapContainer>
   );
 }

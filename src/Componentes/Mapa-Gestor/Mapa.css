@@ -1,11 +1,12 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%; /* Garante que o corpo ocupe 100% da altura da janela */
-  width: 100%;  /* Garante que o corpo ocupe 100% da largura */
+.map-wrapper {
+  width: 100vh;
+  height: 100vh;
+  
 }
 
-#map {
-  height: 100vh; /* 100% da altura da janela de visualização */
-  width: 100vw;  /* 100% da largura da janela de visualização */
+.map-wrapper #map, 
+.map-wrapper .leaflet-container {
+  width: 200%;
+  height: 200%;
+  position: relative;
 }
