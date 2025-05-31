@@ -22,6 +22,9 @@ const NavBar = () => {
       <Link to="/relatorio-entregas" className="navbar-item">
         Relatório de Entregas
       </Link>
+       <Link to="/retirada-caixa" className="navbar-item">
+        Retirada de Caixa
+      </Link>
     </nav>
   );
 };

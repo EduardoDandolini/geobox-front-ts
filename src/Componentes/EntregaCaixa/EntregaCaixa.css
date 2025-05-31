@@ -83,6 +83,11 @@
     appearance: none;
 }
 
+.status-icon {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}
+
 .delivery-button:hover {
     background-color: #e55900;
 }

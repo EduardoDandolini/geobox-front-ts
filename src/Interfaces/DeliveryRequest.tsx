@@ -4,4 +4,5 @@ export interface DeliveryRequest {
     truckPlate: string;
     userId: number;
     boxNumber: string;
+    status: number;
 }

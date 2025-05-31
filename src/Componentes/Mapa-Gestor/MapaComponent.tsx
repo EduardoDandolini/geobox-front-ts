@@ -4,7 +4,7 @@ interface MapContainerProps {
 
 export default function MapContainer({ children }: MapContainerProps) {
   return (
-    <div className="map-container-wrapper">
+    <div className="map-wrapper">
       {children}
     </div>
   );

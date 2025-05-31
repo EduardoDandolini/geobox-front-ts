@@ -5,11 +5,11 @@
     background-color: #2D2F3D;
     height: 60px;
     position: fixed;
-    bottom: 2rem; /* Espaço da parte inferior */
-    left: 50%; /* Posiciona horizontalmente no centro */
-    transform: translateX(-50%); /* Ajusta para centralizar */
-    max-width: 370px; /* Limite de largura */
-    width: 100%; /* Se adapta ao tamanho do viewport/container */
+    bottom: 2rem; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    max-width: 370px; 
+    width: 100%; 
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
     border-radius: 20px;
 }

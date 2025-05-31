@@ -5,6 +5,7 @@ import './Mapa.css';
 import { getAllDeliveries } from '../../service/GeoBoxAPI';
 import { DeliveryResponse } from '../../Interfaces/DeliveryResponse';
 import MapContainer from './MapaComponent';
+import NavBar from '../NavBar/NavBar';
 
 const checkedIcon = L.icon({
   iconUrl: 'https://unpkg.com/leaflet@1.9.2/dist/images/marker-icon.png',
@@ -30,7 +31,7 @@ export default function MapView() {
 
     if (!mapRef.current) {
       console.log('Initializing map...');
-      mapRef.current = L.map('map').setView([-28.4713, -49.0144], 13);
+      mapRef.current = L.map('map',).setView([-28.4713, -49.0144], 13);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors',

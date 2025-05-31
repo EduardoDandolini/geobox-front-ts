@@ -1,12 +1,15 @@
 .map-wrapper {
-  width: 100vh;
   height: 100vh;
-  
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .map-wrapper #map, 
 .map-wrapper .leaflet-container {
-  width: 200%;
-  height: 200%;
+  width: 100vw;
+  height: 100vh;
   position: relative;
-}
+  overflow: auto;
+} 

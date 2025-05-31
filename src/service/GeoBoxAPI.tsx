@@ -6,7 +6,7 @@ import { DeliveryRequest } from '../Interfaces/DeliveryRequest';
 import { BoxResponse } from '../Interfaces/BoxResponse';
 import { LoginResponse } from "../Interfaces/LoginResponse";
 import { GamificationResponse } from "../Interfaces/GamificationResponse";
-
+import { WithdrawalRequest } from "../Interfaces/WithdrawalRequest";
 
 export interface LoginDTO {
   email: string;
@@ -58,6 +58,16 @@ export const saveDelivery = async (deliveryRequest: DeliveryRequest): Promise<vo
     console.error('Erro ao salvar entrega:', error);
   }
 };
+
+export const withdrawal = async (withdrawalRequest: WithdrawalRequest): Promise<void> => {
+  try {
+    await apiClient.post<void>('api/v1/delivery/withdrawal', withdrawalRequest);
+    console.log('Entrega retirada com sucesso!');
+  } catch (error) {
+    console.error('Erro ao retirar entrega:', error);
+  }
+};
+
 
 export const getBoxes = async (): Promise<BoxResponse[]> => {
   try {

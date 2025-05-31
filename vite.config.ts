@@ -18,8 +18,13 @@ export default defineConfig({
         start_url: '/',
         icons: [
           {
-            src: 'src/assets/Group 18.svg',
+            src: '/icons/icon-192.png',
             sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/icons/icon-512.png',
+            sizes: '512x512',
             type: 'image/png',
           },
         ],
@@ -39,9 +44,4 @@ export default defineConfig({
       },
     }),
   ],
-  // server: {
-  //   headers: {
-  //     'Content-Security-Policy': 'geolocation \'self\';',
-  //   },
-  // },
 });
