@@ -14,7 +14,8 @@ export interface LoginDTO {
 }
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:8080/',
+  baseURL: 'http://172.16.220.214:8080/',
+  // baseURL: 'http://localhost:8080/',
   headers: {
     'Content-Type': 'application/json'
   }

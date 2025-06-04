@@ -1,4 +1,5 @@
 export interface LoginResponse {
     token: string,
-    userId: number
+    userId: number,
+    role: number,
 }

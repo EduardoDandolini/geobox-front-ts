@@ -27,7 +27,7 @@ const Login = () => {
             sessionStorage.setItem("user", JSON.stringify(response.userId));
             console.log(sessionStorage.getItem("user"));
             sessionStorage.setItem("token", response.token);
-            navigate('/mapa');
+            navigate('/entrega-caixa');
         } catch (error) {
             alert("Erro ao fazer login. Verifique seu e-mail e senha.");
         }   

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaBox, FaGamepad } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 
 const NavBar = () => {
-  const [activeTab, setActiveTab] = useState('caixas');
+  const [activeTab] = useState('caixas');
 
   return (
     <nav className="navbar">

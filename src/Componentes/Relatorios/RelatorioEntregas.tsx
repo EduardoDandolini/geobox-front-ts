@@ -6,7 +6,6 @@ import NavBar from '../NavBar/NavBar';
 const GenerateReport: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [blob, setBlob] = useState<Blob | null>(null);
 
   const handleGenerateReport = async () => {
     setLoading(true);
@@ -15,7 +14,6 @@ const GenerateReport: React.FC = () => {
     try {
       const response = await generateSheetDelivery();
       const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      setBlob(blob);
       const url = window.URL.createObjectURL(blob);
 
       const link = document.createElement('a');

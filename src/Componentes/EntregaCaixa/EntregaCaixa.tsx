@@ -17,7 +17,6 @@ const Entrega: React.FC = () => {
   const [longitude, setLongitude] = useState<number | null>(null);
   const [geoError, setGeoError] = useState<string | null>(null);
   const [deliveryMessage, setDeliveryMessage] = useState<string | null>(null);
-  const [selectedStatus, setSelectedStatus] = useState<string>('');
 
   const userId = sessionStorage.getItem("user");
 
@@ -77,7 +76,6 @@ const Entrega: React.FC = () => {
       truckPlate: selectedTruck,
       userId: Number(userId),
       boxNumber: selectedBox,
-      status: Number(selectedStatus),
     };
 
     console.log("Enviando entrega:", deliveryRequest);

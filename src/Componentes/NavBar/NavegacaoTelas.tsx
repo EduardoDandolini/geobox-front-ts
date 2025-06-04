@@ -1,8 +1,7 @@
-import { useLocation, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './NavegacaoTelas.css';
 
 function Navbar() {
-  const location = useLocation();
 
   const links = [
     { path: '/mapa', label: 'Mapa' },

@@ -5,7 +5,6 @@ import './Mapa.css';
 import { getAllDeliveries } from '../../service/GeoBoxAPI';
 import { DeliveryResponse } from '../../Interfaces/DeliveryResponse';
 import MapContainer from './MapaComponent';
-import NavBar from '../NavBar/NavBar';
 
 const checkedIcon = L.icon({
   iconUrl: 'https://unpkg.com/leaflet@1.9.2/dist/images/marker-icon.png',
