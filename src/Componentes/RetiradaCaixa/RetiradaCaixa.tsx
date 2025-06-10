@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaCheck } from 'react-icons/fa';
+import { FaCheck, FaBox } from 'react-icons/fa';
 import "./RetiradaCaixa.css";
 import Header from '../Header/Header';
 import NavBar from '../NavBar/NavBar';
@@ -64,14 +64,15 @@ const RetiradaCaixa: React.FC = () => {
             </option>
           ))}
         </select>
+        <FaBox className='icon' />
       </div>
     </div>
 
     {withdrawalMessage && <p className="success-text">{withdrawalMessage}</p>}
     {errorMessage && <p className="error-text">{errorMessage}</p>}
 
-    <button className="button delivery-button" onClick={handleWithdrawal}>
-      <FaCheck className="icon button-icon" /> Confirmar Retirada
+    <button className="delivery-button" onClick={handleWithdrawal}>
+      <FaCheck className="button-icon" /> Confirmar Retirada
     </button>
 
     <NavBar />

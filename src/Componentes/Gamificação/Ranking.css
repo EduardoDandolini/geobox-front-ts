@@ -1,54 +1,190 @@
-.ranking-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1rem;
-    background-color: #f4f4f4;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+:root {
+  --primary-bg-color: #2D2F3D;
+  --primary-orange: #FF6300;
+  --text-gold: #ffcc26;
+  --text-plate: #dfdedd;
+  --text-bronze: #866a3f;
+  --gap-large: 3rem;
+  --gap-medium: 2rem;
+  --gap-small: 1rem;
+}
+
+/* --- Título do Ranking --- */
+.ranking-container h1 {
+  font-size: 1.375rem;
+  color: var(--text-color-light);
+  margin-bottom: 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-orange);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* --- Tabela de Classificação --- */
+.ranking-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px; /* Espaçamento vertical entre as linhas */
+  background-color: transparent; /* Remove o fundo da tabela */
+  border-radius: 10px; /* Bordas arredondadas para a tabela como um todo */
+  overflow: hidden; /* Importante para que as bordas da linha apareçam corretamente */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para o cabeçalho da tabela */
+.ranking-table th {
+  background-color: var(--primary-orange); /* Laranja primário para o cabeçalho */
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 15px 15px;
+  text-align: center;
+  /* Aplicar border-radius apenas nos cantos da primeira e última célula do cabeçalho */
+  /* Isso garante que a linha do cabeçalho tenha o border-radius certo */
+}
+
+/* Canto superior esquerdo do cabeçalho */
+.ranking-table th:first-child {
+    border-top-left-radius: 10px; /* Arredonda o canto da tabela */
+    border-bottom-left-radius: 0; /* Garante que não arredonde embaixo */
+}
+/* Canto superior direito do cabeçalho */
+.ranking-table th:last-child {
+    border-top-right-radius: 10px; /* Arredonda o canto da tabela */
+    border-bottom-right-radius: 0; /* Garante que não arredonde embaixo */
+}
+
+/* Estilo para as células de dados */
+.ranking-table td {
+  padding: 12px 15px; /* Padding interno das células */
+  text-align: center;
+  color: var(--text-color-light);
+  background-color: #3a3d4f; /* Fundo padrão para as células */
+  /* Remove border-radius individual aqui, ele será aplicado na TR */
+}
+
+/* Estilo para cada linha da tabela (o foco principal agora) */
+.ranking-table tbody tr {
+  background-color: #3a3d4f; /* Fundo padrão para as linhas da tabela */
+  border-radius: 10px; /* Bordas arredondadas para a LINHA INTEIRA */
+  overflow: hidden; /* Necessário para que o border-radius na TR funcione */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+/* Efeito de hover nas linhas */
+.ranking-table tbody tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  background-color: #4a4d61; /* Um tom um pouco mais claro no hover */
+}
+
+
+/* Cores para as Top 3 Posições (Aplicadas na linha inteira TR) */
+.top-1 {
+  color: var(--text-gold); /* Texto escuro para contraste */
+  font-weight: bold; 
+}
+
+.top-2 {
+  color: var(--text-plate);
+  font-weight: bold;
+}
+
+.top-3 {
+  color: var(--text-bronze);
+  font-weight: bold;
+}
+
+/* Garante que o texto nas células das top 3 posições tenha a cor correta */
+.top-1 td, .top-2 td, .top-3 td {
+  color: var(--text-color-dark);
+  background-color: inherit; /* As células herdam o background da TR */
+}
+
+/* --- Media Queries para Responsividade --- */
+
+/* Celulares pequenos (até 480px de largura) */
+@media (max-width: 480px) {
+  .ranking-container {
+    padding: var(--gap-small);
+    gap: var(--gap-medium);
+    /* padding-bottom: calc(60px + 1rem + 1rem); */
   }
-  
+
   .ranking-container h1 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
   }
-  
-  .ranking-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
+
   .ranking-table th,
   .ranking-table td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #ccc;
+    padding: 6px;
+    font-size: 0.75rem;
   }
-  
+
   .ranking-table th {
-    background-color: #ddd;
+    font-size: 0.8rem;
+    padding: 8px 6px;
   }
-  
-  .top-1 {
-    background-color: #ffd700; /* Ouro */
-    font-weight: bold;
+  .ranking-table {
+    border-spacing: 0 5px;
   }
-  
-  .top-2 {
-    background-color: #c0c0c0; /* Prata */
-    font-weight: bold;
+}
+
+/* Celulares médios e grandes (481px a 767px de largura) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .ranking-container {
+    padding: 1.5rem;
+    gap: 2.5rem;
+    /* padding-bottom: calc(60px + 1.5rem + 1.5rem); */
   }
-  
-  .top-3 {
-    background-color: #cd7f32; /* Bronze */
-    font-weight: bold;
+
+  .ranking-container h1 {
+    font-size: 1.4rem;
   }
-  
-  @media (max-width: 600px) {
-    .ranking-table th,
-    .ranking-table td {
-      padding: 8px;
-      font-size: 14px;
-    }
+
+  .ranking-table th,
+  .ranking-table td {
+    padding: 8px 10px;
+    font-size: 0.85rem;
   }
-  
+}
+
+/* Tablets (768px a 1023px de largura) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ranking-container {
+    padding: 2.5rem;
+    gap: 3.5rem;
+  }
+
+  .ranking-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .ranking-table th,
+  .ranking-table td {
+    padding: 12px 15px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Desktops e telas maiores (1024px e acima) */
+@media (min-width: 1024px) {
+  .ranking-container {
+    max-width: 1100px;
+    padding-top: 3rem;
+  }
+
+  .ranking-container h1 {
+    font-size: 2rem;
+  }
+
+  .ranking-table th,
+  .ranking-table td {
+    padding: 15px 20px;
+    font-size: 1rem;
+  }
+}

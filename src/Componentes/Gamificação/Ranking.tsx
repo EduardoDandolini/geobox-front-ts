@@ -3,6 +3,7 @@ import { getPoints } from '../../service/GeoBoxAPI';
 import { GamificationResponse } from '../../Interfaces/GamificationResponse';
 import './Ranking.css';
 import NavBar from '../NavBar/NavBar';
+import Header from '../Header/Header';
 
 const Ranking: React.FC = () => {
   const [ranking, setRanking] = useState<GamificationResponse[]>([]);
@@ -17,8 +18,9 @@ const Ranking: React.FC = () => {
 
   return (
     <div className="ranking-container">
+        <Header />
         <NavBar />
-      <h1>🏆 Ranking de Usuários</h1>
+      <h1>🏆 Classificação</h1>
       <table className="ranking-table">
         <thead>
           <tr>
