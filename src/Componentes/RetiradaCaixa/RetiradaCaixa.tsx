@@ -47,36 +47,36 @@ const RetiradaCaixa: React.FC = () => {
   }
 };
 
-  return (
-    <div className="retirada-container">
-      <Header />
-      <h1>Retirada de Caixa</h1>
-      <div className="input-fields">
-        <div className="input-group">
-          <select
-            className="input-select"
-            onChange={(e) => setSelectedDeliveryId(Number(e.target.value))}
-          >
-            <option value="">Selecione o código da entrega</option>
-            {deliveries.map((delivery) => (
-              <option key={delivery.id} value={delivery.id}>
-                Código: {delivery.id}
-              </option>
-            ))}
-          </select>
-        </div>
+ return (
+  <div className="container retirada-container">
+    <Header />
+    <h1>Retirada de Caixa</h1>
+    <div className="form input-fields">
+      <div className="form-group input-group">
+        <select
+          className="select input-select"
+          onChange={(e) => setSelectedDeliveryId(Number(e.target.value))}
+        >
+          <option value="">Selecione o código da entrega</option>
+          {deliveries.map((delivery) => (
+            <option key={delivery.id} value={delivery.id}>
+              Código: {delivery.id}
+            </option>
+          ))}
+        </select>
       </div>
-
-      {withdrawalMessage && <p className="success-text">{withdrawalMessage}</p>}
-      {errorMessage && <p className="error-text">{errorMessage}</p>}
-
-      <button className="delivery-button" onClick={handleWithdrawal}>
-        <FaCheck className="button-icon" /> Confirmar Retirada
-      </button>
-
-      <NavBar />
     </div>
-  );
+
+    {withdrawalMessage && <p className="success-text">{withdrawalMessage}</p>}
+    {errorMessage && <p className="error-text">{errorMessage}</p>}
+
+    <button className="button delivery-button" onClick={handleWithdrawal}>
+      <FaCheck className="icon button-icon" /> Confirmar Retirada
+    </button>
+
+    <NavBar />
+  </div>
+);
 };
 
 export default RetiradaCaixa;

@@ -27,7 +27,7 @@ const Login = () => {
             sessionStorage.setItem("user", JSON.stringify(response.userId));
             console.log(sessionStorage.getItem("user"));
             sessionStorage.setItem("token", response.token);
-            navigate('/entrega-caixa');
+            navigate('/mapa');
         } catch (error) {
             alert("Erro ao fazer login. Verifique seu e-mail e senha.");
         }   
@@ -61,14 +61,11 @@ const Login = () => {
                 </div>
 
                 <div className="recall-forget">
-                    <a href="#">Esqueci minha senha</a>
+                  <a href="/recuperar-senha">Esqueci minha senha</a>
                 </div>
 
                 <button type="submit">Entrar</button>
 
-                <div className="signup-link">
-                    <p>Não tem uma conta? <a href="#">Registre-se</a></p>
-                </div>
             </form>
         </div>
     );
