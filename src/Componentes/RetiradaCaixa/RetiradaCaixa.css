@@ -60,3 +60,13 @@
   color: #f00;
   font-weight: bold;
 }
+
+.delivery-button::hover {
+    background-color: #ca4e01;
+}
+
+button.delivery-button:hover {
+    background-color: #ca4e01;
+    color: #fff;
+}
+

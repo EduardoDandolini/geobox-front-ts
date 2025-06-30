@@ -7,6 +7,10 @@ import RelatorioEntregas from './Componentes/Relatorios/RelatorioEntregas';
 import RetiradaCaixa from './Componentes/RetiradaCaixa/RetiradaCaixa';
 import RecuperacaoSenha from './Componentes/Login/RecuperarSenha/RecuperacaoSenha'
 import RedefinirSenha from './Componentes/Login/RecuperarSenha/RedefinirSenha'
+import CriarCaixa from './Componentes/CriarCaixa/CriarCaixa';
+import CriarCaminhao from './Componentes/CriarCaminhao/CriarCaminhao';
+import CriarMotorista from './Componentes/CriarMotorista/Criar Motorista';
+import Opcoes from './Componentes/Opcoes/Opcoes';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -30,6 +34,15 @@ function App() {
           <Route path="/recuperar-senha" element={<RecuperacaoSenha />} />
 
           <Route path="/redefinir-senha" element={<RedefinirSenha />} />
+
+          <Route path='/opcoes' element={<Opcoes/>}/>
+
+          <Route path="/criar-caixa" element={<CriarCaixa/>}/>
+
+          <Route path='/criar-caminhao' element={<CriarCaminhao/>}/>
+
+          <Route path='/criar-motorista' element={<CriarMotorista/>}/>
+
         </Routes>
       </div>
     </Router>

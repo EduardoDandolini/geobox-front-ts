@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { FaBox, FaGamepad, FaBoxOpen, FaMapMarkedAlt, FaFileAlt } from 'react-icons/fa';
+import { FaBox, FaGamepad, FaBoxOpen, FaMapMarkedAlt } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import './NavBar.css';
+import { FaGear } from 'react-icons/fa6';
 
 const NavBar = () => {
   const location = useLocation(); 
@@ -16,10 +17,16 @@ const NavBar = () => {
       setActiveTab('retirada');
     } else if (path.includes('/mapa')) {
       setActiveTab('mapa');
-    } else if (path.includes('/relatorio-entregas')) {
-      setActiveTab('relatorio');
+    } else if (path.includes('/opcoes')) {
+      setActiveTab('opcoes');
     } else if (path.includes('/ranking')) {
       setActiveTab('gamificacao');
+    } else if (path.includes('/criar-caixa')) {
+      setActiveTab('opcoes');
+    } else if (path.includes('/criar-caminhao')) {
+      setActiveTab('opcoes');
+    } else if (path.includes('/criar-motorista')) {
+      setActiveTab('opcoes');
     }
   }, [location]);
 
@@ -34,8 +41,8 @@ const NavBar = () => {
       <Link to="/mapa" className={`navbar-item ${activeTab === 'mapa' ? 'active' : ''}`}>
         <FaMapMarkedAlt className="navbar-icon" />
       </Link>
-      <Link to="/relatorio-entregas" className={`navbar-item ${activeTab === 'relatorio' ? 'active' : ''}`}>
-        <FaFileAlt className="navbar-icon" />
+      <Link to="/opcoes" className={`navbar-item ${activeTab === 'opcoes' ? 'active' : ''}`}>
+        <FaGear className="navbar-icon" />
       </Link>
       <Link to="/ranking" className={`navbar-item ${activeTab === 'gamificacao' ? 'active' : ''}`}>
         <FaGamepad className="navbar-icon" />
