@@ -8,14 +8,6 @@ const CriarMotorista = () => {
     const [nome, setNome] = useState<string>("");
     const [error, setError] = useState<string>("");
 
-    const capitalizeWords = (str: string) => {
-        return str
-            .split(' ')
-            .filter(Boolean) // remove strings vazias para evitar espaços duplos
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-            .join(' ');
-    };
-
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
