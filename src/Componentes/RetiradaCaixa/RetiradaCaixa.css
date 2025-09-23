@@ -60,3 +60,26 @@
   color: #f00;
   font-weight: bold;
 }
+
+/* Adicione estilos para telas menores */
+@media (max-width: 768px) {
+  .container.retirada-container {
+    padding: 20px;
+  }
+  .form.input-fields {
+    flex-direction: column;
+  }
+  .form-group.input-group {
+    margin-bottom: 20px;
+  }
+  .select.input-select {
+    width: 100%;
+  }
+  .icon {
+    margin-left: 10px;
+  }
+  .delivery-button {
+    width: 100%;
+    margin-top: 20px;
+  }
+}

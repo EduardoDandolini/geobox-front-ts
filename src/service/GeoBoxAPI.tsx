@@ -14,7 +14,8 @@ export interface LoginDTO {
 }
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  // baseURL: import.meta.env.VITE_API_URL,
+  baseURL: 'http://localhost:8080/',
   headers: {
     'Content-Type': 'application/json'
   }
@@ -94,7 +95,7 @@ export const generateSheetDelivery = async () => {
     const response = await apiClient.get('api/v1/delivery/generate-sheet', {
       responseType: 'blob',
     });
-    return response.data; // isso será um Blob agora
+    return response.data; 
   } catch (error) {
     console.error('Erro ao buscar relatório:', error);
     throw error;
@@ -115,9 +116,7 @@ export const forgotPassword = async (email: string): Promise<void> => {
 
 export const resetPassword = async (token: string, novaSenha: string): Promise<void> => {
   try {
-    await apiClient.post<void>(`api/v1/password/reset/${token}`, null, {
-      params: { novaSenha }
-    });
+    await apiClient.post<void>(`api/v1/password/reset/${token}`, { novaSenha });
     console.log('Senha redefinida com sucesso!');
   } catch (error) {
     console.error('Erro ao redefinir senha:', error);

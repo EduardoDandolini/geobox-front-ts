@@ -29,6 +29,8 @@ function App() {
 
           <Route path="/recuperar-senha" element={<RecuperacaoSenha />} />
 
+          <Route path="/redefinir-senha/:token" element={<RedefinirSenha />} />
+
           <Route path="/redefinir-senha" element={<RedefinirSenha />} />
         </Routes>
       </div>
