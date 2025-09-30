@@ -4,6 +4,7 @@ import { login } from "../../service/GeoBoxAPI";
 import { LoginDTO } from "../../Interfaces/LoginDTO";
 import { LoginResponse } from '../../Interfaces/LoginResponse';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
 
 import "./Login.css";
 
@@ -11,6 +12,12 @@ const Login = () => {
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const navigate = useNavigate();
+
+    interface JwtPayload {
+        sub: string;
+        roles: string[];
+        exp: number;
+    }
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -22,15 +29,20 @@ const Login = () => {
 
         try {
             const response: LoginResponse = await login(loginData);
-            console.log("Login bem-sucedido:", response);
 
-            sessionStorage.setItem("user", JSON.stringify(response.userId));
-            console.log(sessionStorage.getItem("user"));
+            sessionStorage.setItem("username", response.username);
             sessionStorage.setItem("token", response.token);
-            navigate('/mapa');
+            sessionStorage.setItem("roles", JSON.stringify(response.roles));
+
+            if (response.roles.includes("Admin")) {
+                navigate("/mapa");
+            } else {
+                navigate("/entrega-caixa");
+            }
         } catch (error) {
+            console.error("Erro no login:", error);
             alert("Erro ao fazer login. Verifique seu e-mail e senha.");
-        }   
+        }
     };
 
     return (
@@ -61,7 +73,7 @@ const Login = () => {
                 </div>
 
                 <div className="recall-forget">
-                  <a href="/recuperar-senha">Esqueci minha senha</a>
+                    <a href="/recuperar-senha">Esqueci minha senha</a>
                 </div>
 
                 <button type="submit">Entrar</button>
