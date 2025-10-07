@@ -36,7 +36,7 @@ export const getAllDeliveries = async (): Promise<DeliveryResponse[]> => {
     return response.data;
   } catch (error) {
     console.error('Erro ao buscar localizações:', error);
-    throw error;
+    return [];
   }
 };
 

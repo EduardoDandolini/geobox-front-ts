@@ -34,38 +34,39 @@ const Login = () => {
     };
 
     return (
-        <div className="container">
+        <div className="standard-container">
             <form onSubmit={handleSubmit}>
                 <div className="logo-container">
                     <img src="src/assets/Group 18.svg" alt="Logo do App" className="logo" />
                 </div>
 
-                <div className="input-fields">
+                <div className="standard-form-group">
                     <input
+                        className="standard-form"
                         type="email"
                         placeholder="Endereço de e-mail"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />
-                    <FaUser className="icon" />
+                    <FaUser className="standard-form-icon" />
                 </div>
 
-                <div className="input-fields">
+                <div className="standard-form-group">
                     <input
+                        className="standard-form"
                         type="password"
                         placeholder="Senha"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <FaLock className="icon" />
+                    <FaLock className="standard-form-icon" />
                 </div>
 
                 <div className="recall-forget">
                   <a href="/recuperar-senha">Esqueci minha senha</a>
                 </div>
 
-                <button type="submit">Entrar</button>
-
+                <button type="submit" className="standard-button">Entrar</button>
             </form>
         </div>
     );

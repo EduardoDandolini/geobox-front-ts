@@ -10,17 +10,23 @@ const Ranking: React.FC = () => {
 
   useEffect(() => {
     const fetchRanking = async () => {
-      const data = await getPoints();
-      setRanking(data);
+      try {
+        const data = await getPoints();
+        // Ensure data is always an array
+        setRanking(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error('Error fetching ranking:', error);
+        setRanking([]);
+      }
     };
     fetchRanking();
   }, []);
 
   return (
-    <div className="ranking-container">
+    <div className="standard-container">
         <Header />
         <NavBar />
-      <h1>🏆 Classificação</h1>
+      <h1 className="standard-title">Classificação</h1>
       <table className="ranking-table">
         <thead>
           <tr>

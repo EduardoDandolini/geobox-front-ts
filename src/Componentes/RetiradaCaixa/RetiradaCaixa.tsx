@@ -17,9 +17,11 @@ const RetiradaCaixa: React.FC = () => {
     const fetchDeliveries = async () => {
       try {
         const fetchedDeliveries = await getAllDeliveries();
-        setDeliveries(fetchedDeliveries);
+        // Ensure data is always an array
+        setDeliveries(Array.isArray(fetchedDeliveries) ? fetchedDeliveries : []);
       } catch (error) {
         console.error('Erro ao buscar entregas:', error);
+        setDeliveries([]);
       }
     };
 
@@ -48,13 +50,13 @@ const RetiradaCaixa: React.FC = () => {
 };
 
  return (
-  <div className="container retirada-container">
+  <div className="standard-container">
     <Header />
-    <h1>Retirada de Caixa</h1>
-    <div className="form input-fields">
-      <div className="form-group input-group">
+    <h1 className="standard-title">Retirada de Caixa</h1>
+    <div className="standard-input-fields">
+      <div className="standard-input-group">
         <select
-          className="select input-select"
+          className="standard-select"
           onChange={(e) => setSelectedDeliveryId(Number(e.target.value))}
         >
           <option value="">Selecione o código da entrega</option>
@@ -64,16 +66,16 @@ const RetiradaCaixa: React.FC = () => {
             </option>
           ))}
         </select>
-        <FaBox className='icon' />
+        <FaBox className='standard-form-icon' />
       </div>
+
+      {withdrawalMessage && <p className="success-text">{withdrawalMessage}</p>}
+      {errorMessage && <p className="error-text">{errorMessage}</p>}
+
+      <button className="standard-button" onClick={handleWithdrawal}>
+        <FaCheck className="button-icon" /> Confirmar Retirada
+      </button>
     </div>
-
-    {withdrawalMessage && <p className="success-text">{withdrawalMessage}</p>}
-    {errorMessage && <p className="error-text">{errorMessage}</p>}
-
-    <button className="delivery-button" onClick={handleWithdrawal}>
-      <FaCheck className="button-icon" /> Confirmar Retirada
-    </button>
 
     <NavBar />
   </div>

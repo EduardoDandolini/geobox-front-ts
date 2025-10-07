@@ -47,10 +47,17 @@ const Entrega: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedTrucks = await getTrucks();
-      const fetchedBoxes = await getBoxes();
-      setTrucks(fetchedTrucks);
-      setBoxes(fetchedBoxes);
+      try {
+        const fetchedTrucks = await getTrucks();
+        const fetchedBoxes = await getBoxes();
+        // Ensure data is always an array
+        setTrucks(Array.isArray(fetchedTrucks) ? fetchedTrucks : []);
+        setBoxes(Array.isArray(fetchedBoxes) ? fetchedBoxes : []);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setTrucks([]);
+        setBoxes([]);
+      }
     };
 
     fetchData();
@@ -86,13 +93,13 @@ const Entrega: React.FC = () => {
   };
 
   return (
-    <div className="entrega-container">
+    <div className="standard-container">
       <Header />
-      <h1>Entrega de Caixa</h1>
-      <div className="input-fields">
-        <div className="input-group">
+      <h1 className="standard-title">Entrega de Caixa</h1>
+      <div className="standard-input-fields">
+        <div className="standard-input-group">
           <select
-            className="input-select"
+            className="standard-select"
             onChange={(e) => setSelectedTruck(e.target.value)}
           >
             <option value="">Selecione o caminhão</option>
@@ -102,12 +109,12 @@ const Entrega: React.FC = () => {
               </option>
             ))}
           </select>
-          <FaTruck className='icon' />
+          <FaTruck className='standard-form-icon' />
         </div>
 
-        <div className="input-group">
+        <div className="standard-input-group">
           <select
-            className="input-select"
+            className="standard-select"
             onChange={(e) => setSelectedBox(e.target.value)}
           >
             <option value="">Selecione o número da caixa</option>
@@ -117,14 +124,14 @@ const Entrega: React.FC = () => {
               </option>
             ))}
           </select>
-          <FaBox className='icon' />
+          <FaBox className='standard-form-icon' />
         </div>
       </div>
 
       {geoError && <p className="error-text">{geoError}</p>}
       {deliveryMessage && <p className="success-text">{deliveryMessage}</p>}
 
-      <button className="delivery-button" onClick={handleDelivery}>
+      <button className="standard-button" onClick={handleDelivery}>
         <FaCheck className="button-icon" />
       </button>
 

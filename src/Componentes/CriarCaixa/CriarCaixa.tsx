@@ -1,4 +1,4 @@
-import { FaBox, FaCheck } from 'react-icons/fa';
+import { FaBox, FaCheck, FaArrowLeft } from 'react-icons/fa';
 import { useState, FormEvent } from 'react';
 import Header from '../Header/Header';
 import NavBar from '../NavBar/NavBar';
@@ -35,31 +35,43 @@ const CriarCaixa = () => {
     };
 
     return (
-        <div className="container">
+        <div className="standard-container">
             <Header />
-            <NavBar />
+            <button 
+                className="back-button" 
+                onClick={() => window.history.back()}
+                type="button"
+            >
+                <FaArrowLeft className="back-icon" />
+                Voltar
+            </button>
+            
             <form onSubmit={handleSubmit}>
-                <h1>Criar nova caixa</h1>
+                <h1 className="standard-title">Criar nova caixa</h1>
 
-                <div className="input-fields">
-                    <input
-                        type="text"
-                        placeholder="Número da caixa"
-                        value={caixa}
-                        onChange={handleInputChange} 
-                    />
-                    <FaBox className="icon" />
+                <div className="standard-input-fields">
+                    <div className="standard-input-group">
+                        <input
+                            className="standard-input"
+                            type="text"
+                            placeholder="Número da caixa"
+                            value={caixa}
+                            onChange={handleInputChange} 
+                        />
+                        <FaBox className="standard-form-icon" />
+                    </div>
                 </div>
 
                 {error && <p className="error-message">{error}</p>}
 
 
-                <button type="submit" className="create-button">
+                <button type="submit" className="standard-button">
                     Criar
-                    <FaCheck className="button-icon"/>
+                    <FaCheck className="standard-button-icon"/>
                 </button>
 
             </form>
+            <NavBar />
         </div>
     );
 };

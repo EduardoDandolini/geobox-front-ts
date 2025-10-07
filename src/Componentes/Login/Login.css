@@ -1,88 +1,36 @@
-html, body {
-    background-color: #2D2F3D;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Inter', sans-serif;
-    width: 100%;
-    display: flex;
-    align-items: center;
+/* Container específico para login - mesmo tamanho do formulário */
+.standard-container {
+    max-width: var(--input-max-width) !important;
+    padding-top: calc(70px + var(--spacing-xs)) !important;
+    padding-bottom: var(--spacing-lg) !important;
 }
 
-.container {
+.standard-container form {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100%;
-    padding: 20px;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    box-sizing: border-box;
-}
-
-.container h1 {
-    text-align: center;
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 20px;
+    gap: var(--spacing-sm);
 }
 
 .logo-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    width: 6rem;
 }
 
 .logo {
-    max-width: 150px;
+    max-width: 100%;
     height: auto;
-    margin-bottom: 1rem;
-}
-
-.input-fields {
-    position: relative;
-    width: 100%;
-    max-width: 30rem;
-    margin: 20px 0;
-}
-
-.input-fields input {
-    height: 3rem;
-    background-color: transparent;
-    border: 2px solid #979797;
-    border-radius: 10px;
-    outline: none;
-    color: #aaa;
-    padding: 0 1rem;
-    font-size: 1rem;
-    box-sizing: border-box;
-}
-
-.input-fields input:hover {
-    border-color: #FF6300;
-}
-
-.input-fields input::placeholder {
-    color: #aaa;
-}
-
-.input-fields .icon {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1rem;
-    color: #aaa;
 }
 
 .recall-forget {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     width: 100%;
+    max-width: var(--input-max-width);
     font-size: 14px;
-    margin: 10px 0;
+    margin: 0;
 }
 
 .recall-forget label {
@@ -101,43 +49,28 @@ html, body {
 .recall-forget a:hover {
     text-decoration: underline;
 }
-
-.container button {
-    align-items: center;
-    width: 100%;
-    height: 50px;
-    background-color: #FF6300;
-    border: none;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    outline: none;
-    margin-top: 30px;
-}
-
 .container button:hover {
-    background-color: #e55900;
+    background-color: var(--primary-orange-hover);
 }
 
-.signup-link {
-    font-size: 14px;
-    text-align: center;
-    margin-top: 15px;
+/* Ajustes responsivos para manter tamanho compacto */
+@media (min-width: 768px) {
+    .standard-container {
+        padding-top: calc(70px + var(--spacing-xs)) !important;
+        padding-bottom: var(--spacing-lg) !important;
+    }
 }
 
-.signup-link p {
-    color: #aaa;
+@media (min-width: 1024px) {
+    .standard-container {
+        padding-top: calc(70px + var(--spacing-sm)) !important;
+        padding-bottom: var(--spacing-lg) !important;
+    }
 }
 
-.signup-link p a {
-    color: #618E00;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.signup-link p a:hover {
-    text-decoration: underline;
+@media (min-width: 1200px) {
+    .standard-container {
+        padding-top: calc(70px + var(--spacing-sm)) !important;
+        padding-bottom: var(--spacing-xl) !important;
+    }
 }

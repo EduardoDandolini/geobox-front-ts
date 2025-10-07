@@ -5,15 +5,43 @@
     background-color: #2D2F3D;
     height: 60px;
     position: fixed;
-    bottom: 2rem; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    max-width: 370px; 
-    width: 100%; 
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
-    border-radius: 20px;
+    bottom: 0; 
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px 20px 0 0;
+    box-sizing: border-box;
 }
 
+/* Responsividade para telas maiores */
+@media (min-width: 768px) {
+    .navbar {
+        max-width: 600px;
+        left: 50%;
+        right: auto;
+        width: auto;
+        transform: translateX(-50%);
+        bottom: 2rem;
+        border-radius: 20px;
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .navbar {
+        max-width: 750px;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .navbar {
+        max-width: 800px;
+        margin-bottom: 1rem;
+    }
+}
 
 .navbar-item {
     display: flex;

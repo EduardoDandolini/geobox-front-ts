@@ -36,9 +36,9 @@ const GenerateReport: React.FC = () => {
   return (
     <div>
       <Header />
-      <div className="container">
-        <h1>Relatório de Entregas</h1>
-        <button className="generate-button" onClick={handleGenerateReport} disabled={loading}>
+      <div className="standard-container">
+        <h1 className="standard-title">Relatório de Entregas</h1>
+        <button className="standard-button" onClick={handleGenerateReport} disabled={loading}>
           {loading ? 'Gerando...' : 'Gerar Relatório'}
         </button>
         {success && <p className="success-msg">Relatório gerado com sucesso!</p>}
