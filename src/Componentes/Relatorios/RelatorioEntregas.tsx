@@ -3,6 +3,7 @@ import './RelatorioEntregas.css';
 import { generateSheetDelivery } from '../../service/GeoBoxAPI';
 import NavBar from '../NavBar/NavBar';
 import Header from '../Header/Header';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const GenerateReport: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -34,15 +35,22 @@ const GenerateReport: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="standard-container">
       <Header />
-      <div className="standard-container">
-        <h1 className="standard-title">Relatório de Entregas</h1>
-        <button className="standard-button" onClick={handleGenerateReport} disabled={loading}>
-          {loading ? 'Gerando...' : 'Gerar Relatório'}
-        </button>
-        {success && <p className="success-msg">Relatório gerado com sucesso!</p>}
-      </div>
+      <button 
+          className="back-button" 
+          onClick={() => window.history.back()}
+          type="button"
+      >
+          <FaArrowLeft className="back-icon" />
+          Voltar
+      </button>
+      
+      <h1 className="standard-title">Relatório de Entregas</h1>
+      <button className="standard-button" onClick={handleGenerateReport} disabled={loading}>
+        {loading ? 'Gerando...' : 'Gerar Relatório'}
+      </button>
+      {success && <p className="success-msg">Relatório gerado com sucesso!</p>}
       <NavBar />
     </div>
   );
